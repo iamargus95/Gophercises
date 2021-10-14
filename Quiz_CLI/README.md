@@ -34,8 +34,8 @@ The CSV file will be in a format like below, where the first column is a questio
 
 - [x] Adapt program from part 1 to add a timer. The default time limit should be 30 seconds, but should also be customizable via a flag.
 
-- [ ] The quiz should stop as soon as the time limit has exceeded.
+- [x] The quiz should stop as soon as the time limit has exceeded.
 
-- [ ] Users should be asked to press enter (or some other key) before the timer starts, and then the questions should be printed out to the screen one at a time until the user provides an answer. Regardless of whether the answer is correct or wrong the next question should be asked.
+- [x] Users should be asked to press enter (or some other key) before the timer starts, and then the questions should be printed out to the screen one at a time until the user provides an answer. Regardless of whether the answer is correct or wrong the next question should be asked.
 
-- [ ] At the end of the quiz the program should still output the total number of questions correct and how many questions there were in total. Questions given invalid answers or unanswered are considered incorrect.
+- [x] At the end of the quiz the program should still output the total number of questions correct and how many questions there were in total. Questions given invalid answers or unanswered are considered incorrect.

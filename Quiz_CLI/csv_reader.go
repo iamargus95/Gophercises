@@ -1,12 +1,15 @@
 package main
 
 import (
+	"bufio"
 	"encoding/csv"
 	"flag"
 	"fmt"
+	"log"
 	"os"
 	"strconv"
 	"strings"
+	"time"
 )
 
 type problem struct {
@@ -27,7 +30,13 @@ func main() {
 	lines, _ := readCSV(*filename)
 	qAndA := parseLines(lines)
 	qz := quiz{problems: qAndA, score: 0}
-	fmt.Println(qz.askQuestion(*timelimit))
+	score, err := qz.askQuestion(*timelimit)
+	if err != nil {
+		fmt.Println(err)
+		fmt.Printf("You scored " + strconv.Itoa(score) + " out of " + strconv.Itoa(len(qAndA)) + "\n")
+	} else {
+		fmt.Println("You scored " + strconv.Itoa(score) + " out of " + strconv.Itoa(len(qAndA)) + "\n")
+	}
 }
 
 func readCSV(filename string) ([][]string, error) {
@@ -60,18 +69,55 @@ func parseLines(lines [][]string) []problem {
 	return ask
 }
 
-func (c *quiz) askQuestion(timeLimit int) string {
+func (c *quiz) askQuestion(timeLimit int) (int, error) {
 	c.score = 0
-	// timer := time.NewTimer(time.Duration(timeLimit) * time.Second)
+
+	timer := time.NewTimer(time.Duration(timeLimit) * time.Second)
+
+	done := make(chan string)
+
+	go getInput(done)
 
 	for i, q := range c.problems {
 		fmt.Printf("Problem #%d: %s = \n", i+1, q.question)
-		var input string
-		fmt.Scanf("%s\n", &input)
-		if input == q.answer {
+		output, err := eachQuestion(q.answer, timer.C, done)
+		if err != nil && output == -1 {
+			return c.score, err
+		}
+		if output == 1 {
 			c.score++
 		}
 	}
 
-	return "You scored " + strconv.Itoa(c.score) + " out of " + strconv.Itoa(len(c.problems))
+	return c.score, nil
+}
+
+func getInput(input chan string) {
+	for {
+		in := bufio.NewReader(os.Stdin)
+		result, err := in.ReadString('\n')
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		input <- result
+	}
+}
+
+func eachQuestion(answer string, timer <-chan time.Time, done <-chan string) (int, error) {
+
+	for {
+		select {
+		case <-timer:
+			return -1, fmt.Errorf("time out")
+		case ans := <-done:
+			score := 0
+			if strings.Compare(strings.Trim(strings.ToLower(ans), "\n"), answer) == 0 {
+				score = 1
+			} else {
+				return 0, fmt.Errorf("wrong answer")
+			}
+			return score, nil
+		}
+	}
 }
