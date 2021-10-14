@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -59,7 +60,7 @@ func parseLines(lines [][]string) []problem {
 	return ask
 }
 
-func (c *quiz) askQuestion(timeLimit int) int {
+func (c *quiz) askQuestion(timeLimit int) string {
 	c.score = 0
 	// timer := time.NewTimer(time.Duration(timeLimit) * time.Second)
 
@@ -72,5 +73,5 @@ func (c *quiz) askQuestion(timeLimit int) int {
 		}
 	}
 
-	return c.score
+	return "You scored " + strconv.Itoa(c.score) + " out of " + strconv.Itoa(len(c.problems))
 }

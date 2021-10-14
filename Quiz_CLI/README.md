@@ -26,13 +26,13 @@ The CSV file will be in a format like below, where the first column is a questio
 5+2,7
 ```
 
-- [ ] At the end of the quiz the program should output the total number of questions correct and how many questions there were in total. Questions given invalid answers are considered incorrect.
+- [x] At the end of the quiz the program should output the total number of questions correct and how many questions there were in total. Questions given invalid answers are considered incorrect.
 
 **NOTE:** *CSV files may have questions with commas in them. Eg: `"what is 2+2, sir?",4` is a valid row in a CSV. Look into the CSV package in Go*
 
 ### Part 2
 
-- [ ] Adapt program from part 1 to add a timer. The default time limit should be 30 seconds, but should also be customizable via a flag.
+- [x] Adapt program from part 1 to add a timer. The default time limit should be 30 seconds, but should also be customizable via a flag.
 
 - [ ] The quiz should stop as soon as the time limit has exceeded.
 
