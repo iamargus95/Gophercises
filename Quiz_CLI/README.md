@@ -7,7 +7,7 @@
 
 For default .csv execution with custom timer.
 
-- `go run csv_reader.go -timer=<enter value in seconds>`
+- `go run quiz_cli.go -timer=<enter value in seconds>`
 
 For Custom .csv exectution
 
