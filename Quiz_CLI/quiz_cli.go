@@ -27,9 +27,12 @@ func main() {
 	filename := flag.String("csv", "problems.csv", "Use this to add a relative path to your custom quiz.csv")
 	timelimit := flag.Int("timer", 30, "Use this flag to set a custom timer.")
 	flag.Parse()
+
 	lines, _ := readCSV(*filename)
 	qAndA := parseLines(lines)
+
 	qz := quiz{problems: qAndA, score: 0}
+
 	score, err := qz.askQuestion(*timelimit)
 	if err != nil {
 		fmt.Println(err)

@@ -1,5 +1,19 @@
 # Exercise #1: Quiz Game
 
+## USAGE:
+
+**NOTE:** *Default csv file is provided. Timer is set to 30 seconds by default. Custom values for both -csv and -timer flags is possible.*
+
+
+For default .csv execution with custom timer.
+
+- `go run csv_reader.go -timer=<enter value in seconds>`
+
+For Custom .csv exectution
+
+- `go run quiz_cli.go -csv=<'relative path'/filename> `
+
+
 ## Exercise details
 
 ### Part 1

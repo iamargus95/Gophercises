@@ -2,6 +2,9 @@ package main
 
 import (
 	"testing"
+	"time"
+
+	"gotest.tools/assert"
 )
 
 var testProblems = []struct {
@@ -52,4 +55,28 @@ func TestParseCSV(t *testing.T) {
 			t.Fail()
 		}
 	}
+}
+
+func testEachQuestion(t *testing.T) {
+	timer := time.NewTimer(time.Duration(2) * time.Second).C
+	done := make(chan string)
+	answer := "2"
+	var ans int
+	var err error
+	allDone := make(chan bool)
+	go func() {
+		ans, err = eachQuestion(answer, timer, done)
+		allDone <- true
+	}()
+	done <- "2"
+
+	<-allDone
+	if err != nil {
+		t.Error(err)
+	}
+	assert.Equal(t, ans, 1)
+}
+
+func TestEachQuestion(t *testing.T) {
+	t.Run("Test each question ", testEachQuestion)
 }
