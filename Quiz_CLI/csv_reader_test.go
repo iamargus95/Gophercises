@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-var want = []struct {
+var testProblems = []struct {
 	question string
 	answer   string
 }{
@@ -30,10 +30,25 @@ func TestReadCSV(t *testing.T) {
 	}
 
 	for i, v := range got {
-		if want[i].question != v[0] {
+		if testProblems[i].question != v[0] {
 			t.Fail()
 		}
-		if want[i].answer != v[1] {
+		if testProblems[i].answer != v[1] {
+			t.Fail()
+		}
+	}
+}
+
+func TestParseCSV(t *testing.T) {
+
+	input, _ := readCSV("mock.csv")
+	got := parseLines(input)
+
+	for i, v := range got {
+		if testProblems[i].question != v.question {
+			t.Fail()
+		}
+		if testProblems[i].answer != v.answer {
 			t.Fail()
 		}
 	}
