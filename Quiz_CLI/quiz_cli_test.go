@@ -1,57 +1,44 @@
 package main
 
 import (
+	"errors"
+	"reflect"
 	"testing"
 	"time"
 
 	"gotest.tools/assert"
 )
 
-var testProblems = []struct {
-	question string
-	answer   string
-}{
-	{
-		question: "1+1",
-		answer:   "2",
-	},
-	{
-		question: "2+2",
-		answer:   "4",
-	},
-	{
-		question: "3+3",
-		answer:   "6",
-	},
-}
-
-func TestReadCSV(t *testing.T) {
-
-	got, err := readCSV("mock.csv")
-	if err != nil {
-		t.Error(err)
-	}
-
-	for i, v := range got {
-		if testProblems[i].question != v[0] {
-			t.Fail()
-		}
-		if testProblems[i].answer != v[1] {
-			t.Fail()
-		}
-	}
-}
-
 func TestParseCSV(t *testing.T) {
 
-	input, _ := readCSV("mock.csv")
-	got := parseLines(input)
+	var testProblems = []struct {
+		file     string
+		expected []problem
+		err      error
+	}{
+		{
+			file:     "mock.csv",
+			expected: []problem{{"1+1", "2"}, {"2+2", "4"}, {"3+3", "6"}},
+			err:      nil,
+		},
+		{
+			file:     "mock1.csv",
+			expected: []problem{{"What is the capital of India?", "Delhi"}, {"When did India gain Independence?", "1947"}},
+			err:      nil,
+		},
+		{
+			file:     "nonexistent.csv",
+			expected: nil,
+			err:      errors.New("could not read file"),
+		},
+	}
 
-	for i, v := range got {
-		if testProblems[i].question != v.question {
+	for _, v := range testProblems {
+		got, err := parseCSV(v.file)
+		if !reflect.DeepEqual(err, v.err) {
 			t.Fail()
 		}
-		if testProblems[i].answer != v.answer {
+		if !reflect.DeepEqual(got, v.expected) {
 			t.Fail()
 		}
 	}
