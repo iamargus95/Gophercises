@@ -28,9 +28,10 @@ func main() {
 	timelimit := flag.Int("timer", 30, "Use this flag to set a custom timer.")
 	flag.Parse()
 
-	lines, _ := readCSV(*filename)
-	qAndA := parseLines(lines)
-
+	qAndA, err := parseCSV(*filename)
+	if err != nil {
+		log.Fatal(err)
+	}
 	qz := quiz{problems: qAndA, score: 0}
 
 	score, err := qz.askQuestion(*timelimit)
@@ -42,7 +43,7 @@ func main() {
 	}
 }
 
-func readCSV(filename string) ([][]string, error) {
+func parseCSV(filename string) ([]problem, error) {
 
 	file, err := os.Open(filename)
 	if err != nil {
@@ -52,16 +53,8 @@ func readCSV(filename string) ([][]string, error) {
 
 	r := csv.NewReader(file)
 
-	lines, err := r.ReadAll()
-	if err != nil {
-		err := fmt.Errorf("failed to parse the provided csv file")
-		return nil, err
-	}
+	lines, _ := r.ReadAll()
 
-	return lines, nil
-}
-
-func parseLines(lines [][]string) []problem {
 	ask := make([]problem, len(lines))
 	for i, line := range lines {
 		ask[i] = problem{
@@ -69,7 +62,7 @@ func parseLines(lines [][]string) []problem {
 			answer:   strings.TrimSpace(line[1]),
 		}
 	}
-	return ask
+	return ask, nil
 }
 
 func (c *quiz) askQuestion(timeLimit int) (int, error) {
