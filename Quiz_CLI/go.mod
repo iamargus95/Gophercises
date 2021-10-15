@@ -1,4 +1,4 @@
-module iamargus95/gophercises
+module iamargus95/gophercises/quiz_cli
 
 go 1.17
 
