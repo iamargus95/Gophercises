@@ -47,7 +47,6 @@ func parseCSV(filename string) ([]problem, error) {
 
 	file, err := os.Open(filename)
 	if err != nil {
-		err := fmt.Errorf("could not read file")
 		return nil, err
 	}
 
@@ -70,13 +69,13 @@ func (c *quiz) askQuestion(timeLimit int) (int, error) {
 
 	timer := time.NewTimer(time.Duration(timeLimit) * time.Second)
 
-	done := make(chan string)
+	input := make(chan string)
 
-	go getInput(done)
+	go getInput(input)
 
 	for i, q := range c.problems {
 		fmt.Printf("Problem #%d: %s = \n", i+1, q.question)
-		output, err := eachQuestion(q.answer, timer.C, done)
+		output, err := eachQuestion(q.answer, timer.C, input)
 		if err != nil && output == -1 {
 			return c.score, err
 		}
@@ -89,6 +88,7 @@ func (c *quiz) askQuestion(timeLimit int) (int, error) {
 }
 
 func getInput(input chan string) {
+
 	for {
 		in := bufio.NewReader(os.Stdin)
 		result, err := in.ReadString('\n')
@@ -100,20 +100,18 @@ func getInput(input chan string) {
 	}
 }
 
-func eachQuestion(answer string, timer <-chan time.Time, done <-chan string) (int, error) {
+func eachQuestion(answer string, timer <-chan time.Time, input <-chan string) (int, error) {
 
-	for {
-		select {
-		case <-timer:
-			return -1, fmt.Errorf("time out")
-		case ans := <-done:
-			score := 0
-			if strings.Compare(strings.Trim(strings.ToLower(ans), "\n"), answer) == 0 {
-				score = 1
-			} else {
-				return 0, fmt.Errorf("wrong answer")
-			}
-			return score, nil
+	select {
+	case <-timer:
+		return -1, fmt.Errorf("time out")
+	case ans := <-input:
+		score := 0
+		if strings.Compare(strings.Trim(strings.ToLower(ans), "\n"), answer) == 0 {
+			score = 1
+		} else {
+			return 0, fmt.Errorf("wrong answer")
 		}
+		return score, nil
 	}
 }
