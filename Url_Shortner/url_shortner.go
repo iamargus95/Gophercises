@@ -37,7 +37,7 @@ func main() {
 func yamlReader(filename string) ([]byte, error) {
 	yamlData, err := ioutil.ReadFile(filename)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("could not read YAML file")
 	}
 	return yamlData, nil
 }
@@ -46,7 +46,7 @@ func parseYAML(yamlData []byte, fallback http.Handler) (http.HandlerFunc, error)
 	var paths []pathURL
 	err := yaml.Unmarshal(yamlData, &paths)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("could not unmarshall yaml data")
 	}
 
 	pathsToUrls := make(map[string]string)
