@@ -109,7 +109,7 @@ func eachQuestion(answer string, stop <-chan time.Time, input <-chan string) (in
 		if strings.Compare(strings.Trim(strings.ToLower(ans), "\n"), answer) == 0 {
 			score = 1
 		} else {
-			return 0, fmt.Errorf("wrong answer")
+			return 0, nil
 		}
 		return score, nil
 	}
