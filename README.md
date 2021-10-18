@@ -3,8 +3,8 @@ My journey using https://gophercises.com/ to learn Golang.
 
 | GOPHERCISES | EXERCISM |
 | :---: | :---: |
-| #### Date - 16 & 17th Oct | #### Date - 14th Oct
-| - [x] Quiz Cli | - [x] Hello World
+| - Date - 16 & 17th Oct | #### Date - 14th Oct
+| - [x] Quiz Cli | :ballot_box_with_check:Hello World
 | - [x] URL Shortner | - [x] Annalyn's Infiltration
 | | - [x] Gopher's Gorgeous Lasagna
 | | - [x] Party Robot
