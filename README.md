@@ -4,7 +4,7 @@ My journey using https://gophercises.com/ to learn Golang.
 | GOPHERCISES | EXERCISM |
 | :---: | :---: |
 | - Date - 16 & 17th Oct | #### Date - 14th Oct
-| <ul><li>- [x] Quiz Cli </li></ul> |:ballot_box_with_check: Hello World
+| <ul>- [x] Quiz Cli </ul> |:ballot_box_with_check: Hello World
 | - [x] URL Shortner | - [x] Annalyn's Infiltration
 | | - [x] Gopher's Gorgeous Lasagna
 | | - [x] Party Robot
