@@ -37,14 +37,14 @@ func TestParseCSV(t *testing.T) {
 }
 
 func testEachQuestion(t *testing.T) {
-	timer := time.NewTimer(time.Duration(2) * time.Second).C
+	ticker := time.NewTicker(time.Duration(2) * time.Second).C
 	input := make(chan string)
 	answer := "2"
 	var ans int
 	var err error
 	allDone := make(chan bool)
 	go func() {
-		ans, err = eachQuestion(answer, timer, input)
+		ans, err = eachQuestion(answer, ticker, input)
 		allDone <- true
 	}()
 	input <- "2"

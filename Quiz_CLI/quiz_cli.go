@@ -67,15 +67,14 @@ func parseCSV(filename string) ([]problem, error) {
 func (c *quiz) askQuestion(timeLimit int) (int, error) {
 	c.score = 0
 
-	timer := time.NewTimer(time.Duration(timeLimit) * time.Second)
-
+	ticker := time.NewTicker(time.Duration(timeLimit) * time.Second)
 	input := make(chan string)
 
 	go getInput(input)
 
 	for i, q := range c.problems {
 		fmt.Printf("Problem #%d: %s = \n", i+1, q.question)
-		output, err := eachQuestion(q.answer, timer.C, input)
+		output, err := eachQuestion(q.answer, ticker.C, input)
 		if err != nil && output == -1 {
 			return c.score, err
 		}
@@ -100,10 +99,10 @@ func getInput(input chan string) {
 	}
 }
 
-func eachQuestion(answer string, timer <-chan time.Time, input <-chan string) (int, error) {
+func eachQuestion(answer string, stop <-chan time.Time, input <-chan string) (int, error) {
 
 	select {
-	case <-timer:
+	case <-stop:
 		return -1, fmt.Errorf("time out")
 	case ans := <-input:
 		score := 0
