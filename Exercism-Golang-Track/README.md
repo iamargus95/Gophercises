@@ -13,3 +13,4 @@ Exercism go track started on 13th october 2021
 - [x] Cards Tricks
 - [x] BlackJack
 - [x] Booking up for Beauty
+- [x] Lasagne-Master
