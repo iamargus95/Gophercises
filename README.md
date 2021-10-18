@@ -1,6 +1,36 @@
-# Gophercises
+# Gophercises & Exercism
 My journey using https://gophercises.com/ to learn Golang.
 
-- Date - 16 & 17th Oct
-- [x] Quiz Cli
-- [x] URL Shortner
+| GOPHERCISES | EXERCISM |
+| :---: | :---: |
+| #### Date - 16 & 17th Oct | #### Date - 14th Oct
+| - [x] Quiz Cli | - [x] Hello World
+| - [x] URL Shortner | - [x] Annalyn's Infiltration
+| | - [x] Gopher's Gorgeous Lasagna
+| | - [x] Party Robot
+| | #### Date - 15th Oct
+| | - [x] Weather Forecast
+| | - [x] Cars Assemble
+| | #### Date - 16th Oct
+| | - [x] Need for Speed
+| | - [x] Welcome to Tech Palace
+| | - [x] Cards Tricks
+| | #### Date - 18th Oct
+| | - [x] BlackJack
+| | - [x] Booking up for Beauty
+| | - [x] Lasagna-Master
+| | - [x] Gross-Store
+| | - [x] Chessboard
+
+
+
+
+
+
+
+
+
+
+
+
+
