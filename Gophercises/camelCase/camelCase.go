@@ -1,4 +1,4 @@
-package camelcase
+package main
 
 import (
 	"flag"
@@ -8,9 +8,9 @@ import (
 func main() {
 	flag.Parse()
 	result := camelCase(flag.Arg(0))
-	fmt.Printf("The string %s has %d words.\n", flag.Arg(0), result)
+	fmt.Printf("The string '%s' has %d words.\n", flag.Arg(0), result)
 }
 
 func camelCase(input string) int {
-
+	return len(input)
 }
