@@ -12,11 +12,13 @@ import (
 	"time"
 )
 
+//  problem struct is how individual lines in the csv are parsed i.e 'question, answer' format
 type problem struct {
 	question string
 	answer   string
 }
 
+// type quiz gives an array of questions with an initial score of 0
 type quiz struct {
 	problems []problem
 	score    int
@@ -43,6 +45,7 @@ func main() {
 	}
 }
 
+// parseCSV takes the csv filename as input and parses the contents into an array of type problem
 func parseCSV(filename string) ([]problem, error) {
 
 	file, err := os.Open(filename)
@@ -57,17 +60,18 @@ func parseCSV(filename string) ([]problem, error) {
 	ask := make([]problem, len(lines))
 	for i, line := range lines {
 		ask[i] = problem{
-			question: strings.TrimSpace(line[0]),
+			question: strings.TrimSpace(line[0]), // Trimspace takes care of unwanted spaces around the parsed string value
 			answer:   strings.TrimSpace(line[1]),
 		}
 	}
 	return ask, nil
 }
 
+// askQuestion is a method of struct quiz. It initializes the score and starts a timer before asking questions
 func (c *quiz) askQuestion(timeLimit int) (int, error) {
 	c.score = 0
 
-	ticker := time.NewTicker(time.Duration(timeLimit) * time.Second)
+	ticker := time.NewTicker(time.Duration(timeLimit) * time.Second) // Starts a ticker that will reset after timeLimit secs. Default is 30 secs
 	input := make(chan string)
 
 	go getInput(input)
@@ -86,11 +90,12 @@ func (c *quiz) askQuestion(timeLimit int) (int, error) {
 	return c.score, nil
 }
 
+// getInput reads the user input from CLI and pushes it into input channel
 func getInput(input chan string) {
 
 	for {
 		in := bufio.NewReader(os.Stdin)
-		result, err := in.ReadString('\n')
+		result, err := in.ReadString('\n') // '\n' is used as delimiter
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -99,6 +104,7 @@ func getInput(input chan string) {
 	}
 }
 
+// eachQuestion askes one single question after checking for ticker channel, Else it takes value out of input channel and compares it to the corresponding answer
 func eachQuestion(answer string, stop <-chan time.Time, input <-chan string) (int, error) {
 
 	select {
