@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"strings"
 )
 
 func main() {
@@ -12,5 +13,14 @@ func main() {
 }
 
 func camelCase(input string) int {
-	return len(input)
+	controlStr := input
+	controlStr = strings.ToLower(controlStr)
+	count := 1
+	for i := range input {
+		if controlStr[i] != input[i] {
+			count++
+		}
+	}
+
+	return count
 }
