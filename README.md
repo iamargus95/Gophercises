@@ -8,7 +8,7 @@ My journey using https://gophercises.com/ to learn Golang.
 | <h5>16th Oct </h5> | <li>- [x] Quiz Cli</li>|
 | <h5>17th Oct </h5> | <li>- [x] URL Shortner</li>| <li>- [x] Need for Speed </li><li>- [x] Welcome to Tech Palace </li><li>- [x] Cards Tricks </li>
 | <h5>18th Oct </h5> | | <li>- [x] BlackJack </li><li>- [x] Booking up for Beauty </li><li>- [x] Lasagna-Master </li><li>- [x] Gross-Store </li><li>- [x] Chessboard </li>
-| <h5>19th Oct </h5> | | <li>- [x] Logs, Logs, Logs
+| <h5>19th Oct </h5> | | <li>- [x] Logs, Logs, Logs </li><li>- [x] Election Day
 
 
 
