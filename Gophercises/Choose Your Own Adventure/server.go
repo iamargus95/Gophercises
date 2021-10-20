@@ -8,14 +8,14 @@ import (
 )
 
 func StoryPage(s Story) http.Handler {
-	return handler{s}
+	return Handler{s}
 }
 
-type handler struct {
-	s Story
+type Handler struct {
+	Title Story
 }
 
-func (h handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (h Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	tpl := template.Must(template.ParseGlob("./default.html"))
 	path := strings.TrimSpace(r.URL.Path)
 	if path == "" || path == "/" {
@@ -23,7 +23,7 @@ func (h handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	path = path[1:]
-	if chapter, ok := h.s[path]; ok {
+	if chapter, ok := h.Title[path]; ok {
 		err := tpl.Execute(w, chapter)
 		if err != nil {
 			log.Println(err)
