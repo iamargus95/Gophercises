@@ -38,6 +38,18 @@ var testCases = []struct {
 		delta:    6,
 		expected: "Ghi-Jkl",
 	},
+	{
+		desc:     "UPPERCASE with delta 26",
+		input:    "AZ",
+		delta:    26,
+		expected: "AZ",
+	},
+	{
+		desc:     "LowerCase with Delta 26",
+		input:    "az",
+		delta:    26,
+		expected: "az",
+	},
 }
 
 func TestCipher(t *testing.T) {

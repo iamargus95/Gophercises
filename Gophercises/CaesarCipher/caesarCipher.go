@@ -23,24 +23,35 @@ func main() {
 func getCipher(input string, delta int) string {
 	output := []rune{}
 	for _, v := range input {
-		output = append(output, cipher(v, delta))
+		if int(v) >= int('A') && int(v) <= int('Z') {
+			output = append(output, cipherBig(v, delta))
+		} else if int(v) >= int('a') && int(v) <= int('z') {
+			output = append(output, cipherSmall(v, delta))
+		} else {
+			output = append(output, v)
+		}
 	}
 	return string(output)
 }
 
-func cipher(s rune, delta int) rune {
+func cipherBig(s rune, delta int) rune {
 
-	if int(s) >= int('A') && int(s) <= int('Z') || int(s) >= int('a') && int(s) <= int('z') {
-		ascii := int(s)
-		ascii += delta
-		if ascii > 90 && ascii < 97 {
-			ascii -= 90
-			ascii += 64
-		} else if ascii > 122 {
-			ascii -= 122
-			ascii += 96
-		}
-		return rune(ascii)
+	ascii := int(s)
+	ascii += delta
+	if ascii > 90 {
+		ascii -= 90
+		ascii += 64
 	}
-	return s
+	return rune(ascii)
+}
+
+func cipherSmall(s rune, delta int) rune {
+
+	ascii := int(s)
+	ascii += delta
+	if ascii > 122 {
+		ascii -= 122
+		ascii += 96
+	}
+	return rune(ascii)
 }
