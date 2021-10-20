@@ -11,9 +11,13 @@ import (
 func main() {
 
 	file := flag.String("file", "gopher.json", "The name of the JSON file with the CYOA story.")
+	port := flag.String("port", "8080", "Input the port at which you want the service to run.")
 	flag.Parse()
-	fmt.Println("Starting server on https://localhost:8080 ...")
+
+	fmt.Printf("Starting server on http://localhost:%s ...\n", *port)
+
 	content := cyoa.ParseJson(*file)
 	handler := cyoa.StoryPage(content)
-	log.Fatal(http.ListenAndServe(":8080", handler))
+
+	log.Fatal(http.ListenAndServe(":"+*port, handler))
 }
