@@ -1,5 +1,9 @@
 # Choose your own adventure
 
+## Usage:
+
+1. Go into the root of the project 'cmd/cyoaweb'
+2. Do a `make run` - The server should be up and running on port 8080.
 
 ## Exercise details:
 
