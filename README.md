@@ -20,4 +20,4 @@
 | <h5>19th Oct </h5> | <li>- [x] Camel Case </li><li>- [x] Caesar Cipher </li> | <li>- [x] Logs, Logs, Logs </li><li>- [x] Election Day </li><li>- [x] Two-fer </li><li>- [x] Hamming </li><li>- [x] Raindrops </li><li>- [x] Scrabble Score </li><li>- [x] Isogram </li><li>- [x] Difference-of-Squares </li>
 | <h5>20th Oct</h5> | <li>- [x] Choose your own Adventure </li> | |
 | <h5>22nd Oct</h5> | | <li>- [x] Luhn Algorithm </li><li>- [x] Grains </li><li>-[x] Clock </li><li>- [x] Parallel-Letter-Frequency </li><li>- [x] Tree-Building </li>
-| <h5>25th Oct</h5> | |<li>- [x] Robot Name</li><li>- [x] Elons-Toys </li><li>- [x] Census </li><li>- [x] Interest is Interesting </li><li>- [x] Tournament </li><li>- [x] Roman numerals </li>
+| <h5>25th Oct</h5> | |<li>- [x] Robot Name</li><li>- [x] Elons-Toys </li><li>- [x] Census </li><li>- [x] Interest is Interesting </li><li>- [x] Tournament </li><li>- [x] Roman numerals </li><li>- [x] Twelve Days of Christmas </li>
