@@ -1,5 +1,10 @@
 # Exercise #4: HTML Link Parser
 
+## Usage:
+
+1. `go run main.go <filename.html>`
+
+
 ## Exercise details
 
 In this exercise the goal is 
