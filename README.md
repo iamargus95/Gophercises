@@ -21,3 +21,4 @@
 | <h5>20th Oct</h5> | <li>- [x] Choose your own Adventure </li> | |
 | <h5>22nd Oct</h5> | | <li>- [x] Luhn Algorithm </li><li>- [x] Grains </li><li>-[x] Clock </li><li>- [x] Parallel-Letter-Frequency </li><li>- [x] Tree-Building </li>
 | <h5>25th Oct</h5> | |<li>- [x] Robot Name</li><li>- [x] Elons-Toys </li><li>- [x] Census </li><li>- [x] Interest is Interesting </li><li>- [x] Tournament </li><li>- [x] Roman numerals </li><li>- [x] Twelve Days of Christmas </li>
+| <h5> 26th Oct </h5> | | <li>- [x] Matrix </li>
