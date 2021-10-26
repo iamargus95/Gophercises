@@ -14,11 +14,14 @@ type Link struct {
 
 // Parse will take in an HTML document and will return a slice of links parsed from it.
 func Parse(r io.Reader) ([]Link, error) {
+
 	doc, err := html.Parse(r)
 	if err != nil {
 		return nil, err
 	}
+
 	links := linkNode(doc)
+
 	var attributes []Link
 	for _, link := range links {
 		attributes = append(attributes, buildLink(link))
@@ -29,6 +32,7 @@ func Parse(r io.Reader) ([]Link, error) {
 
 // linkNode takes in all *html.Node and returns them
 func linkNode(n *html.Node) []*html.Node {
+
 	if n.Type == html.ElementNode && n.Data == "a" {
 		return []*html.Node{n}
 	}
@@ -45,13 +49,13 @@ func linkNode(n *html.Node) []*html.Node {
 func buildLink(n *html.Node) Link {
 
 	var ret Link
-
 	for _, attr := range n.Attr {
 		if attr.Key == "href" {
 			ret.Href = attr.Val
 			break
 		}
 	}
+
 	ret.Text = linkText(n)
 
 	return ret
@@ -59,6 +63,7 @@ func buildLink(n *html.Node) Link {
 
 // linkText returns string of all HTML text starting from given root node, stripping extra whitespace
 func linkText(n *html.Node) string {
+
 	if n.Type == html.TextNode {
 		return n.Data
 	}
@@ -68,7 +73,6 @@ func linkText(n *html.Node) string {
 	}
 
 	var ret string
-
 	for c := n.FirstChild; c != nil; c = c.NextSibling {
 		ret += linkText(c) + " "
 	}
