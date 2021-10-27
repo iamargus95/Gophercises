@@ -22,3 +22,4 @@
 | <h5>22nd Oct</h5> | | <li>- [x] Luhn Algorithm </li><li>- [x] Grains </li><li>-[x] Clock </li><li>- [x] Parallel-Letter-Frequency </li><li>- [x] Tree-Building </li>
 | <h5>25th Oct</h5> | |<li>- [x] Robot Name</li><li>- [x] Elons-Toys </li><li>- [x] Census </li><li>- [x] Interest is Interesting </li><li>- [x] Tournament </li><li>- [x] Roman numerals </li><li>- [x] Twelve Days of Christmas </li>
 | <h5> 26th Oct </h5> | <li>- [x] HTML Parser </li> | <li>- [x] Matrix </li><li>- [x] Error-Handling </li><li>- [x] Space-Age </li><li>- [x] Leap year </li><li>- [x] Triangle </li><li>- [x] Nucleotide-Count </li>
+| <h5> 27th Oct </h5> | | <li>- [x] RNA Transcription </li>
