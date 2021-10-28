@@ -14,15 +14,16 @@ type Cell struct {
 }
 
 func main() {
-
 	grid := newGrid()
+	fmt.Println(grid)
 	updatedGrid := updateAliveNeighbours(*grid)
 	final := gameOfLife(updatedGrid)
 	fmt.Println(final)
-
 }
 
+// newGrid creates a random matrix of size (size X size).
 func newGrid() *[size][size]Cell {
+
 	grid := [size][size]Cell{}
 	rand.Seed(time.Now().UTC().UnixNano())
 	for i := 0; i < size; i++ {
@@ -34,40 +35,7 @@ func newGrid() *[size][size]Cell {
 	return &grid
 }
 
-// getCell checks the value of one neighbour depending on x and y
-func getCellMortality(x, y int, grid [size][size]Cell) bool {
-	if x >= 0 && y >= 0 && x < size && y < size {
-		return grid[x][y].isAlive
-	}
-	return false
-}
-
-func countAliveNeighbours(x, y int, r [size][size]Cell) int {
-	count := 0
-	xCordinates := []int{-1, -1, -1, 0, 0, 1, 1, 1}
-	yCordinates := []int{-1, 0, 1, -1, 1, -1, 0, 1}
-
-	for i := range xCordinates {
-		if getCellMortality(x+xCordinates[i], y+yCordinates[i], r) {
-			count++
-		}
-	}
-
-	return count
-}
-
-func updateAliveNeighbours(r [size][size]Cell) [size][size]Cell {
-
-	c := r
-	for i := 0; i < size; i++ {
-		for j := 0; j < size; j++ {
-			c[i][j].neighbours = countAliveNeighbours(i, j, r)
-		}
-	}
-
-	return c
-}
-
+// Takes a grid and checks if the cells should live or die.
 func gameOfLife(r [size][size]Cell) [size][size]Cell {
 
 	c := r
@@ -85,4 +53,42 @@ func gameOfLife(r [size][size]Cell) [size][size]Cell {
 	}
 
 	return c
+}
+
+// updateAliveNeighbours updates the neighbours field of the Cell struct with the number of alive neighbours.
+func updateAliveNeighbours(r [size][size]Cell) [size][size]Cell {
+
+	c := r
+	for i := 0; i < size; i++ {
+		for j := 0; j < size; j++ {
+			c[i][j].neighbours = countAliveNeighbours(i, j, r)
+		}
+	}
+
+	return c
+}
+
+// countAliveNeighbours gives a sum of the total alive neighbours of a cell at position (x,y).
+func countAliveNeighbours(x, y int, r [size][size]Cell) int {
+
+	count := 0
+	xCordinates := []int{-1, -1, -1, 0, 0, 1, 1, 1}
+	yCordinates := []int{-1, 0, 1, -1, 1, -1, 0, 1}
+
+	for i := range xCordinates {
+		if getCellMortality(x+xCordinates[i], y+yCordinates[i], r) {
+			count++
+		}
+	}
+
+	return count
+}
+
+// getCell checks if the cell is alive or not.
+func getCellMortality(x, y int, grid [size][size]Cell) bool {
+
+	if x >= 0 && y >= 0 && x < size && y < size {
+		return grid[x][y].isAlive
+	}
+	return false
 }
