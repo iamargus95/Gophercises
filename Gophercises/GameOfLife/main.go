@@ -2,81 +2,62 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
-	"time"
+	"strconv"
+	"strings"
 )
 
-const size = 3
-
-type Cell struct {
-	isAlive    bool
-	neighbours int
-}
-
 func main() {
-	grid := newGrid()
-	fmt.Println(grid)
-	updatedGrid := updateAliveNeighbours(*grid)
-	final := gameOfLife(updatedGrid)
+
+	newGrid := getGrid()
+	fmt.Println(newGrid)
+
+	neighbours := getAliveNeighbours(newGrid)
+	final := gameOfLife(newGrid, neighbours)
+
 	fmt.Println(final)
 }
 
-// newGrid creates a random matrix of size (size X size).
-func newGrid() *[size][size]Cell {
+// gameOfLife takes a grid and it's neighbours and checks if the cells should live or die.
+func gameOfLife(grid, neighbours [][]int) [][]int {
 
-	grid := [size][size]Cell{}
-	rand.Seed(time.Now().UTC().UnixNano())
-	for i := 0; i < size; i++ {
-		for j := 0; j < size; j++ {
-			grid[i][j].isAlive = rand.Float32() > 0.5
-		}
-	}
-
-	return &grid
-}
-
-// Takes a grid and checks if the cells should live or die.
-func gameOfLife(r [size][size]Cell) [size][size]Cell {
-
-	c := r
-	for i := 0; i < size; i++ {
-		for j, val := range r[i] {
-			total := val.neighbours
-			if total < 2 || total >= 4 {
-				val.isAlive = false
-			} else if total == 3 {
-				val.isAlive = true
+	for i := 0; i < len(grid[0]); i++ {
+		for j := 0; j < len(grid[0]); j++ {
+			if neighbours[i][j] < 2 || neighbours[i][j] >= 4 {
+				grid[i][j] = 0
+			} else if neighbours[i][j] == 3 {
+				grid[i][j] = 1
 			}
-
-			c[i][j] = val
 		}
 	}
-
-	return c
+	return grid
 }
 
-// updateAliveNeighbours updates the neighbours field of the Cell struct with the number of alive neighbours.
-func updateAliveNeighbours(r [size][size]Cell) [size][size]Cell {
+// getAliveNeighbours make a new 2D array with the number of alive neighbours for each corresponding cell in grid.
+func getAliveNeighbours(grid [][]int) [][]int {
 
-	c := r
-	for i := 0; i < size; i++ {
-		for j := 0; j < size; j++ {
-			c[i][j].neighbours = countAliveNeighbours(i, j, r)
+	neighbours := make([][]int, len(grid[0]))
+	for i := range neighbours {
+		neighbours[i] = make([]int, len(grid[0]))
+	}
+
+	for i := 0; i < len(grid[0]); i++ {
+		for j := 0; j < len(grid[0]); j++ {
+			neighbours[i][j] = countAliveNeighbours(i, j, grid)
 		}
 	}
 
-	return c
+	return neighbours
 }
 
 // countAliveNeighbours gives a sum of the total alive neighbours of a cell at position (x,y).
-func countAliveNeighbours(x, y int, r [size][size]Cell) int {
+func countAliveNeighbours(x, y int, grid [][]int) int {
 
 	count := 0
 	xCordinates := []int{-1, -1, -1, 0, 0, 1, 1, 1}
 	yCordinates := []int{-1, 0, 1, -1, 1, -1, 0, 1}
 
 	for i := range xCordinates {
-		if getCellMortality(x+xCordinates[i], y+yCordinates[i], r) {
+		if getCellMortality(x+xCordinates[i], y+yCordinates[i], grid) {
 			count++
 		}
 	}
@@ -85,10 +66,42 @@ func countAliveNeighbours(x, y int, r [size][size]Cell) int {
 }
 
 // getCell checks if the cell is alive or not.
-func getCellMortality(x, y int, grid [size][size]Cell) bool {
+func getCellMortality(x, y int, grid [][]int) bool {
 
-	if x >= 0 && y >= 0 && x < size && y < size {
-		return grid[x][y].isAlive
+	if x >= 0 && y >= 0 && x < len(grid[0]) && y < len(grid[0]) {
+		if grid[x][y] > 0 {
+			return true
+		}
 	}
 	return false
+}
+
+func getGrid() [][]int {
+
+	var sizeOfInputMatrix string
+	fmt.Println("The input array is a 2D array of size M X N where M is equal to N")
+	fmt.Println("Enter the value of M: ")
+	fmt.Scanln(&sizeOfInputMatrix)
+
+	M, _ := strconv.Atoi(sizeOfInputMatrix)
+
+	newGrid := make([][]int, M)
+	for i := range newGrid {
+		newGrid[i] = make([]int, M)
+	}
+
+	var input string
+	fmt.Printf("Enter the value of the %d cells separated by a comma: ", M*M)
+	fmt.Scanln(&input)
+
+	input = strings.ReplaceAll(input, " ", "")
+	cellData := strings.Split(input, ",")
+
+	for i := 0; i < M; i++ {
+		for j := 0; j < M; j++ {
+			newGrid[j][i], _ = strconv.Atoi(cellData[(j*M)+i])
+		}
+	}
+
+	return newGrid
 }
