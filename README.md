@@ -25,4 +25,4 @@
 | <h5> 27th Oct </h5> | | <li>- [x] RNA Transcription </li><li>- [x] Bank Account </li><li>- [x] Proverb </li><li>- [x] Accumulate </li><li>- [x] Strain </li><li>- [x] Extract - Transform - Load </li><li>- [x] Protien Translation </li><li>- [x] Pangram </li><li>- [x] Reverse String </li><li>- [x] Anagram </li><li>- [x] Word-Count </li>
 | <h5>29th Oct</h5> | <li>- [x] Game of Life </li><li>- [x] Mine Field </li> |
 | <h5>1st Nov</h5> | <li>- [ ] Deck of Cards </li> |
-| <h5>2nd Nov</h5> | <li>- [x] Deck of Cards </li> |
+| <h5>2nd Nov</h5> | <li>- [x] Deck of Cards </li><li>- [ ] Black Jack </li> |
