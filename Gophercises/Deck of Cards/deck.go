@@ -105,3 +105,26 @@ func Less(cards []Card) func(i, j int) bool {
 func absRank(c Card) int {
 	return int(c.Suit)*int(maxRank) + int(c.Rank)
 }
+
+func Filter(f func(card Card) bool) func([]Card) []Card {
+
+	return func(cards []Card) []Card {
+		var ret []Card
+		for _, card := range cards {
+			if !f(card) {
+				ret = append(ret, card)
+			}
+		}
+		return ret
+	}
+}
+
+func Deck(n int) func([]Card) []Card {
+	return func(cards []Card) []Card {
+		var ret []Card
+		for i := 0; i < n; i++ {
+			ret = append(ret, cards...)
+		}
+		return ret
+	}
+}
