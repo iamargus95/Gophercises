@@ -34,9 +34,40 @@ func main() {
 		}
 	}
 	fmt.Println("----- FINAL HANDS -----")
-	fmt.Println("Player: ", player)
-	fmt.Println("Dealer: ", dealer)
+	fmt.Println("Player: ", player, "\nScore: ", player.Score())
+	fmt.Println("Dealer: ", dealer, "\nScore: ", dealer.Score())
 
+}
+
+func (h Hand) Score() int {
+	minScore := h.minScore()
+	if minScore > 11 {
+		return minScore
+	}
+
+	for _, c := range h {
+		if c.Rank == deck.Ace {
+			return minScore + 10
+		}
+	}
+	return minScore
+}
+
+func (h Hand) minScore() int {
+	score := 0
+	for _, c := range h {
+		score += min(int(c.Rank), 10)
+	}
+
+	return score
+}
+
+func min(a, b int) int {
+	if a > b {
+		return b
+	}
+
+	return a
 }
 
 func (h Hand) DealerString() string {
