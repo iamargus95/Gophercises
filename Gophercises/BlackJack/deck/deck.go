@@ -50,10 +50,28 @@ type Card struct {
 var suits = [...]Suit{Spade, Diamond, Club, Heart}
 
 func (c Card) String() string {
+	var suit string
 	if c.Suit == Joker {
 		return c.Suit.String()
 	}
-	return fmt.Sprintf("%s of %ss", c.Rank.String(), c.Suit.String())
+
+	if c.Suit == Spade {
+		suit = "♠️"
+	}
+
+	if c.Suit == Diamond {
+		suit = "♦️"
+	}
+
+	if c.Suit == Club {
+		suit = "♣️"
+	}
+
+	if c.Suit == Heart {
+		suit = "♥️"
+	}
+
+	return fmt.Sprintf("%v%s", c.Rank.String(), suit)
 }
 
 func New(opts ...func([]Card) []Card) []Card {
