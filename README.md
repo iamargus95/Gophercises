@@ -26,3 +26,4 @@
 | <h5>29th Oct</h5> | <li>- [x] Game of Life </li><li>- [x] Mine Field </li> |
 | <h5>1st Nov</h5> | <li>- [ ] Deck of Cards </li> |
 | <h5>2nd Nov</h5> | <li>- [x] Deck of Cards </li><li>- [ ] Black Jack </li> |
+| <h5>3rd Nov</h5> | <li>- [x] Black Jack </li> |
