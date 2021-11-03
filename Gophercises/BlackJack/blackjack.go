@@ -23,9 +23,9 @@ func main() {
 
 	var input string
 	for input != "s" {
-		fmt.Println("Player :", player)
-		fmt.Println("Dealer :", dealer.DealerString())
-		fmt.Println("What do you wanna do? (h)it or (s)tand? :")
+		fmt.Println("\n\tPlayer :", player)
+		fmt.Println("\n\tDealer :", dealer.DealerString())
+		fmt.Println("\n\tWhat do you wanna do? (h)it or (s)tand? :")
 		fmt.Scanf("%s\n", &input)
 		switch input {
 		case "h":
@@ -33,9 +33,29 @@ func main() {
 			player = append(player, card)
 		}
 	}
-	fmt.Println("----- FINAL HANDS -----")
-	fmt.Println("Player: ", player, "\nScore: ", player.Score())
-	fmt.Println("Dealer: ", dealer, "\nScore: ", dealer.Score())
+	fmt.Println("\n\t----- FINAL HANDS -----")
+	fmt.Println("\n\tPlayer: ", player, "\n\tScore: ", player.Score())
+	fmt.Println("\n\tDealer: ", dealer, "\n\tScore: ", dealer.Score())
+
+	if player.Score() > 21 {
+		fmt.Println("\n\tYou lose!!")
+	}
+
+	if player.Score() == 21 {
+		fmt.Println("\n\tYou win!!")
+	}
+
+	if player.Score() == dealer.Score() {
+		fmt.Println("\n\tIt's a Tie!!")
+	}
+
+	if player.Score() > dealer.Score() && player.Score() <= 21 {
+		fmt.Println("\n\tYou win!!")
+	}
+
+	if player.Score() < dealer.Score() && dealer.Score() <= 21 {
+		fmt.Println("\n\tYou lose!!")
+	}
 
 }
 
