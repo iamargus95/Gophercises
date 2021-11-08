@@ -27,4 +27,4 @@
 | <h5>1st Nov</h5> | <li>- [ ] Deck of Cards </li> |
 | <h5>2nd Nov</h5> | <li>- [x] Deck of Cards </li><li>- [ ] Black Jack </li> |
 | <h5>3rd Nov</h5> | <li>- [x] Black Jack </li><li>- [x] Bowling Alley </li> |
-| <h5>8th Nov</h5> | | <li>- [x] Bird Watcher </li><li>- [x] Run Length Encoder </li><li>- [x] ISBN Verifier </li>
+| <h5>8th Nov</h5> | | <li>- [x] Bird Watcher </li><li>- [x] Run Length Encoder </li><li>- [x] ISBN Verifier </li><li>- [x] Largest-Series-Product</li>
