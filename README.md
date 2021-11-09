@@ -28,4 +28,4 @@
 | <h5>2nd Nov</h5> | <li>- [x] Deck of Cards </li><li>- [ ] Black Jack </li> |
 | <h5>3rd Nov</h5> | <li>- [x] Black Jack </li><li>- [x] Bowling Alley </li> |
 | <h5>8th Nov</h5> | | <li>- [x] Bird Watcher </li><li>- [x] Run Length Encoder </li><li>- [x] ISBN Verifier </li><li>- [x] Largest-Series-Product</li> |
-| <h5>9th Nov</h5> | <li>- [x] Sitemap Builder </li> | <li>- [x] Nth Prime Number </li><li>- [x] Pythagorean Triplet </li><li>- [x] Sum of Multiples </li><li>- [x] Rotational Cipher </li> |
+| <h5>9th Nov</h5> | <li>- [x] Sitemap Builder </li> | <li>- [x] Nth Prime Number </li><li>- [x] Pythagorean Triplet </li><li>- [x] Sum of Multiples </li><li>- [x] Rotational Cipher </li><li>- [x] Diffie-Hellman </li> |
