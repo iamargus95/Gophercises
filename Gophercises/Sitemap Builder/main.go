@@ -21,20 +21,20 @@ func main() {
 	}
 }
 
-func sitemap(site string) []string {
-	resp, err := http.Get(site)
-	if err != nil {
-		log.Println("no response body detected")
+func withPrefix(prefix string) func(string) bool {
+	return func(link string) bool {
+		return strings.HasPrefix(link, prefix)
 	}
+}
 
-	reqURL := resp.Request.URL
-	baseURL := &url.URL{
-		Scheme: reqURL.Scheme,
-		Host:   reqURL.Host,
+func filter(links []string, keepFn func(string) bool) []string {
+	var ret []string
+	for _, link := range links {
+		if keepFn(link) {
+			ret = append(ret, link)
+		}
 	}
-	base := baseURL.String()
-
-	return filter(hrefBuilder(resp.Body, base), withPrefix(base))
+	return ret
 }
 
 func hrefBuilder(r io.Reader, base string) []string {
@@ -53,18 +53,18 @@ func hrefBuilder(r io.Reader, base string) []string {
 	return hrefs
 }
 
-func filter(links []string, keepFn func(string) bool) []string {
-	var ret []string
-	for _, link := range links {
-		if keepFn(link) {
-			ret = append(ret, link)
-		}
+func sitemap(site string) []string {
+	resp, err := http.Get(site)
+	if err != nil {
+		log.Println("no response body detected")
 	}
-	return ret
-}
 
-func withPrefix(prefix string) func(string) bool {
-	return func(link string) bool {
-		return strings.HasPrefix(link, prefix)
+	reqURL := resp.Request.URL
+	baseURL := &url.URL{
+		Scheme: reqURL.Scheme,
+		Host:   reqURL.Host,
 	}
+	base := baseURL.String()
+
+	return filter(hrefBuilder(resp.Body, base), withPrefix(base))
 }
