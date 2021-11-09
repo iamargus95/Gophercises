@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"iamargus95/Gophercises/sitemap/link"
+	"io"
 	"log"
 	"net/http"
 	"net/url"
@@ -14,21 +15,30 @@ func main() {
 	urlFlag := flag.String("url", "https://github.com/iamargus95", "Target URL for Site Map")
 	flag.Parse()
 
-	resp, err := http.Get(*urlFlag)
+	pages := sitemap(*urlFlag)
+	for _, page := range pages {
+		fmt.Println(page)
+	}
+}
+
+func sitemap(site string) []string {
+	resp, err := http.Get(site)
 	if err != nil {
 		log.Println("no response body detected")
 	}
-	defer resp.Body.Close()
-
-	links, _ := link.Parse(resp.Body)
 
 	reqURL := resp.Request.URL
 	baseURL := &url.URL{
 		Scheme: reqURL.Scheme,
 		Host:   reqURL.Host,
 	}
-
 	base := baseURL.String()
+
+	return filter(hrefBuilder(resp.Body, base), withPrefix(base))
+}
+
+func hrefBuilder(r io.Reader, base string) []string {
+	links, _ := link.Parse(r)
 
 	var hrefs []string
 	for _, link := range links {
@@ -40,7 +50,21 @@ func main() {
 		}
 	}
 
-	for _, href := range hrefs {
-		fmt.Println(href)
+	return hrefs
+}
+
+func filter(links []string, keepFn func(string) bool) []string {
+	var ret []string
+	for _, link := range links {
+		if keepFn(link) {
+			ret = append(ret, link)
+		}
+	}
+	return ret
+}
+
+func withPrefix(prefix string) func(string) bool {
+	return func(link string) bool {
+		return strings.HasPrefix(link, prefix)
 	}
 }
