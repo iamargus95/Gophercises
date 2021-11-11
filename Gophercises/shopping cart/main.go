@@ -1,18 +1,19 @@
 package main
 
-import "fmt"
-
 type item struct {
-	name          string
-	price         int
-	quantity      int
-	buyXgetXoffer buyXgetXoffer
-	percentOffer  percentOffer
+	name     string
+	price    int
+	quantity int
+	offer    offer
+}
+
+type offer interface {
+	apply(thing item) int
 }
 
 type buyXgetXoffer struct {
-	buyQty     int
-	getFreeQty int
+	buyQty  int
+	freeQty int
 }
 
 type percentOffer struct {
@@ -21,26 +22,37 @@ type percentOffer struct {
 }
 
 func main() {
-	fmt.Println(itemService(item{name: "Dove Soap", price: 30, quantity: 5, buyXgetXoffer: buyXgetXoffer{buyQty: 2, getFreeQty: 1}}))
-	fmt.Println(itemService(item{name: "Dove Soap", price: 30, quantity: 5, percentOffer: percentOffer{1, 50}}))
+
+	var o offer
+	var i item
+	o = buyXgetXoffer{buyQty: 2, freeQty: 1}
+	i = item{name: "Dove", price: 30, quantity: 3, offer: o}
 }
 
-func itemService(thing item) int {
-	if thing.buyXgetXoffer.buyQty == 0 || thing.buyXgetXoffer.getFreeQty == 0 {
-		return thing.price * thing.quantity
-	}
+func (o buyXgetXoffer) apply(thing item) int {
 
 	qty := thing.quantity
 	deductItemQty := 0
-	discount := thing.quantity % (thing.buyXgetXoffer.buyQty + thing.buyXgetXoffer.getFreeQty)
+	discount := thing.quantity % (o.buyQty + o.freeQty)
 
-	if thing.buyXgetXoffer.buyQty != 0 {
-		for thing.quantity-discount > thing.buyXgetXoffer.buyQty {
-			deductItemQty += thing.buyXgetXoffer.getFreeQty
-			thing.quantity -= deductItemQty
-		}
-
-		return (qty - deductItemQty) * thing.price
+	for thing.quantity-discount > o.buyQty {
+		deductItemQty += o.freeQty
+		thing.quantity -= deductItemQty
 	}
 
+	return (qty - deductItemQty) * thing.price
+
+}
+
+func (o percentOffer) apply(thing item) int {
+
+	qty := thing.quantity
+	deductPercentQty := 0
+	itemDiscount := o.buyQty * 2
+	for thing.quantity-deductPercentQty >= 0 {
+		deductPercentQty += o.buyQty
+		thing.quantity -= itemDiscount
+	}
+
+	return ((qty - deductPercentQty) * thing.price) + ((deductPercentQty * thing.price) / o.percentOff)
 }
