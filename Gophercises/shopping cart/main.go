@@ -5,6 +5,7 @@ import "fmt"
 type item struct {
 	price    int
 	quantity int
+	offer    offer
 }
 
 type offer interface {
@@ -18,25 +19,34 @@ type buyXgetYoffer struct {
 	freeQty int
 }
 
-type percentOffer struct {
+type buyXgetYpercentOff struct {
 	buyQty     int
 	percentOff int
 }
 
+type shoppingCart struct {
+	items []item
+	bill  billValue
+}
+
+type billValue interface {
+	getBill(shoppingCart) int
+}
+
+type billOffer struct {
+	minBillValue int
+	percentOff   int
+}
+
 func main() {
 
-	var o offer
-	var i item = item{price: 30, quantity: 4}
+	var i item = item{price: 30, quantity: 4, offer: buyXgetYoffer{buyQty: 2, freeQty: 1}}
+	fmt.Println(i.offer.apply(i)) //result : 90
 
-	o = buyXgetYoffer{buyQty: 2, freeQty: 1}
-	fmt.Println(o.apply(i)) //result : 90
-
-	o = percentOffer{buyQty: 1, percentOff: 50}
-	fmt.Println(o.apply(i)) //result : 90
-
-	o = noOffer{}
-	fmt.Println(o.apply(i)) //result : 120
-
+	var s shoppingCart
+	var b billValue
+	s.items = []item{{price: 30, quantity: 10, offer: buyXgetYoffer{buyQty: 2, freeQty: 1}}, {price: 100, quantity: 6, offer: buyXgetYpercentOff{buyQty: 1, percentOff: 50}}}
+	fmt.Println(b.getBill(s))
 }
 
 func (o buyXgetYoffer) apply(thing item) int {
@@ -51,13 +61,11 @@ func (o buyXgetYoffer) apply(thing item) int {
 	}
 
 	return (qty - deductItemQty) * thing.price
-
 }
 
-func (o percentOffer) apply(thing item) int {
+func (o buyXgetYpercentOff) apply(thing item) int {
 
 	price := 0
-
 	for i := thing.quantity; i >= 1; i-- {
 		if i%(o.buyQty+1) == 0 {
 			price += ((thing.price * o.percentOff) / 100)
@@ -71,4 +79,18 @@ func (o percentOffer) apply(thing item) int {
 
 func (o noOffer) apply(thing item) int {
 	return thing.price * thing.quantity
+}
+
+func (b billOffer) getBill(s shoppingCart) int {
+
+	bill := 0
+	for _, v := range s.items {
+		bill += v.offer.apply(v)
+	}
+
+	if bill >= b.minBillValue {
+		return (bill - (bill*b.percentOff)/100)
+	}
+
+	return bill
 }
