@@ -31,5 +31,5 @@
 | <h5>9th Nov</h5> | <li>- [x] Sitemap Builder </li> | <li>- [x] Nth Prime Number </li><li>- [x] Pythagorean Triplet </li><li>- [x] Sum of Multiples </li><li>- [x] Rotational Cipher </li><li>- [x] Diffie-Hellman </li><li>- [x] Atbash Cipher </li><li>- [x] Sieve </li><li>- [x] Perfect Numbers </li><li>- [x] Crypto Square </li> |
 | <h5>10th Nov</h5> | | <li>- [x] Simple Cipher </li>
 | <h5>11th Nov</h5> | <li>-[x] Shopping Cart </li> | <li>- [x] All your base </li>
-| <h5>15th Nov</h5> | | <li>-[x] Allergies </li><li>-[x] Secret Handshake </li><li>-[x] Variable Length Quantity </li><li>-[x] Armstrong Numbers </li><li>-[x] Meetup </li>
+| <h5>15th Nov</h5> | | <li>-[x] Allergies </li><li>-[x] Secret Handshake </li><li>-[x] Variable Length Quantity </li><li>-[x] Armstrong Numbers </li><li>-[x] Meetup </li><li>-[x] Phone Numbers </li>
 | <h5>15th Nov</h5> | | |
