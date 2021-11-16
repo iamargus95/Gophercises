@@ -1,4 +1,4 @@
-package prime
+package prime1
 
 // Source: exercism/problem-specifications
 // Commit: d928874 prime-factors: apply "input" policy

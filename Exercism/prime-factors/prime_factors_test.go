@@ -1,4 +1,4 @@
-package prime
+package prime1
 
 import (
 	"reflect"
