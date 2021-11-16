@@ -33,4 +33,4 @@
 | <h5>11th Nov</h5> | <li>-[x] Shopping Cart </li> | <li>- [x] All your base </li>
 | <h5>12th Nov</h5> | |<li>-[x] Grep </li><li>-[x] Allergies </li><li>-[x] Secret Handshake </li><li>-[x] Variable Length Quantity </li><li>-[x] Armstrong Numbers </li> |
 | <h5>15th Nov</h5> | | <li>-[x] Meetup </li><li>-[x] Phone Number Formatting </li><li>-[x] Prime Factors </li><li>-[x] Pig Latin </li><li>-[x] Series </li><li>-[x] Ledger </li><li>-[x] Linked List </li><li>-[x] Rail Fence Cipher </li><li>-[x] Binary Search </li><li>-[x] Two Buckets </li><li>-[x] Say </li><li>-[x] Wordy </li>
-| <h5>16th Nov</h5> | | <li>-[x] Binary Search Tree </li><li>-[x] OCR Numbers </li><li>-[x] Diamond Pattern </li><li>-[x] Matching Brackets </li><li>-[x] POV </li>
+| <h5>16th Nov</h5> | | <li>-[x] Binary Search Tree </li><li>-[x] OCR Numbers </li><li>-[x] Diamond Pattern </li><li>-[x] Matching Brackets </li><li>-[x] POV </li><li>-[x] Palindrome Products </li>
