@@ -14,7 +14,7 @@
 		- Explanation: The answer is "b", with the length of 1.
 	- Example 3:
 		- Input: s = "pwwkew"
-		- Output: 3 "wke" //does not fit
+		- Output: 3 "wke"
 		- Explanation: The answer is "wke", with the length of 3.
 		> **Note**: The answer must be a substring, "pwke" is a subsequence and not a substring.
 	- Example 4:
